@@ -1,0 +1,213 @@
+@media screen and (max-width: 1024px) {
+  body{
+    width: 100%;     
+  }
+  .footer{
+    width: 100%;
+  }
+}
+@media screen and (min-width: 1025px) {
+  body{
+    width: 60%;
+  }
+  .footer{
+    width: 60%;
+  }
+}
+html{
+  margin: 0;
+  padding: 0; 
+  /* font-size: 14px;  */
+  font-size: 2vh;  
+}
+body{
+  height: 50rem;
+  margin: 0 auto;  
+  padding: 0;
+  background-color: #f2f7f2;
+  box-shadow: 0 0 6px rgba(49, 99, 51, 0.5);
+}
+a{
+  text-decoration: none;
+}
+
+.recordme-container{
+  height: 100%;
+  background-color: #fbf9ed;
+}
+.header{
+  margin: 0;
+  padding: 0 0.8rem;
+  height: 2.6rem;
+  line-height: 2.6rem; 
+  text-align: center;
+  font-size: 1.3rem;
+  color: white;
+  background-color: #4dc071; 
+}
+.header-title{
+  text-shadow: 2px 0px 4px #246327;
+  color: #fff;
+}
+.entry-wrap{
+  float: right;
+}
+.user-name,.entry-wrap{
+  margin-left: 2px;
+  font-size: 0.8rem;
+  color: #e4fde3; 
+}
+.user-name{
+  float: left;
+  max-width: 10rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: default;
+}
+.download{
+  color: #e4fde3; 
+}
+.btn{
+  cursor: default;
+}
+.entry, .sign, .signup, .exit{
+  display: none;
+}
+.login, .sign{
+  margin-left: 20px;
+}
+.recordme-content{
+  overflow: auto;
+}
+.record-header{
+  padding: 0.8rem 0.8rem;
+  cursor: default;
+}
+.record-header:hover{
+  background-color: #f3fbf4;
+}
+.record-header:active{
+  background-color: #e6f7e8;
+}
+.record-header:focus{
+  outline: none;
+}
+.record-header::-webkit-details-marker{
+  display: none;
+}
+.record-title{
+  display: inline-block;
+  font-size: 1rem;
+  max-width: 36rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #475139;
+}
+.record-link{
+  color: #8c9e74;
+  text-decoration: underline;
+  vertical-align: super;
+}
+.record-ol{
+  margin: 0 0.8rem;
+  padding-inline-start: 2.2rem; 
+}
+.mark-text{
+  padding: 0.2rem 0;
+  color:#6a7955;
+  font-size: 0.9rem;
+  word-wrap: break-word;
+  padding-inline-start: 0.8rem;
+  border-bottom: 1px dashed #d5f4db;
+}
+.icon-delete{
+  float: right;
+  font-size: 1.2rem;
+  color: #d5e8e4;
+  vertical-align: top;
+  cursor: default;
+}
+.icon-delete:hover{
+  color: #93c4ba;
+}
+.icon-delete:active{
+  color: #5ca698;
+}
+.icon-add-label{
+  color: #fff;
+  background-color: #d5e8e4;
+  border-radius: 4px;
+  cursor: default;
+}
+.icon-add-label:hover{
+  background-color: #93c4ba;
+}
+.icon-add-label:active{
+  background-color: #5ca698;
+}
+.label-item{
+  font-size: 0.8rem;
+  color: #93c4ba;
+}
+.label-list label{
+  padding: 0 4px;
+  font-size: 0.8rem;
+  background-color: #7fe0ed;
+  color: #fff;
+  border-radius: 4px;
+}
+.footer{
+  position: fixed;
+  bottom: 0;
+  padding: 0.6rem 0;
+  text-align: center;
+  color: #95a57e;
+  font-size: 0.8rem;
+  border-top: 1px dashed #d5f4db;
+}
+.content-tip{
+  display: none;
+  color: #95a57e;
+}
+.login-wrap{
+  display: none;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+.input-text{
+  width: 5rem;
+  font-size: 0.8rem;
+  padding: 6px 8px;
+  border: none;
+  border-bottom: 1px solid #4dc071;
+  background: transparent;
+}
+.input-text:focus{
+  border-bottom: 1px solid #7fe0ed;
+  outline: none;
+}
+.input-button{ 
+  padding: 0.3rem 0;
+  width: 3rem;
+  font-size: 0.8rem;
+  outline: none;
+  background: transparent;
+  color: #4dc071;
+  border-radius: 6px;
+  border: 1px solid #4dc071;
+}
+.input-button:hover{
+  border-color: #4cd55f;
+  color: #4cd55f;
+}
+.input-button:active{
+  border-color: #208a2f;
+  color: #208a2f;
+}
+.error-tip{
+  display: none;
+  color: #f87f5d;
+  font-size: 0.8rem;
+}

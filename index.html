@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>recordme</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <!-- 要引用es6模块，必须设置http服务器-->
+  <script  type="module" src="js/index.js"></script>
+  <script src="js/axios.min.js"></script> 
+</head>
+<body>
+  <div class="recordme-container">
+    <header class="header">
+      <a href="/" class="header-title">recordme</a>   
+      <span id="user_name" class="user-name"></span>
+      <span class="entry-wrap" id="entry_wrap">
+          <a href="/" title="下载recordme chrome插件" class="download">下载</a>
+          <span>&ensp;|&ensp;</span>
+          <span id="nav_entry" class="btn entry">登录</span>
+          <span id="nav_signup" class="btn signup">注册</span>
+          <span id="nav_exit" class="btn exit">退出</span>
+      </span>
+    </header>
+    <div class="recordme-content" id="content">
+      <div class="content-tip">空空如也，赶紧用recordme chrome插件记录文字吧。</div>
+    </div>
+    <div class="login-wrap" id="login_wrap">
+      <input type="text" class="input-text" placeholder="用户名" id="name"/>
+      <input type="password" class="input-text" placeholder="密码" id="pw"/>
+      <input type="button" value="登录" class="input-button login" id="login"/>
+      <input type="button" value="注册" class="input-button sign" id="sign"/>
+      <p class="error-tip" id="error_tip">输入有误，请重新登录</p>
+    </div>
+    <footer class="footer">
+      <span>Copyright © tanmy 2018</span>
+    </footer>
+  </div>
+</body>
+</html>
