@@ -21,11 +21,11 @@ html{
   font-size: 2vh;  
 }
 body{
-  height: 50rem;
+  height: 100vh;
   margin: 0 auto;  
   padding: 0;
-  background-color: #f2f7f2;
-  box-shadow: 0 0 6px rgba(49, 99, 51, 0.5);
+  background-color: #fdfef6;
+  box-shadow: 0 0 0.4rem rgba(115, 162, 117, 0.5);
 }
 a{
   text-decoration: none;
@@ -33,7 +33,7 @@ a{
 
 .recordme-container{
   height: 100%;
-  background-color: #fbf9ed;
+  background-color: #fff;
 }
 .header{
   margin: 0;
@@ -78,6 +78,8 @@ a{
   margin-left: 20px;
 }
 .recordme-content{
+  height: calc(100% - 7rem);
+  padding: 0.8rem;
   overflow: auto;
 }
 .record-header{
@@ -85,10 +87,10 @@ a{
   cursor: default;
 }
 .record-header:hover{
-  background-color: #f3fbf4;
+  background-color: #f4f8c9;
 }
 .record-header:active{
-  background-color: #e6f7e8;
+  background-color: #eef3ab;
 }
 .record-header:focus{
   outline: none;
@@ -96,10 +98,15 @@ a{
 .record-header::-webkit-details-marker{
   display: none;
 }
+.record-detail{
+  margin-bottom: 0.8rem;
+  box-shadow: 0 0 0.2rem rgba(61, 160, 65, 0.5);
+  border-radius: 0.4rem;
+}
 .record-title{
   display: inline-block;
+  max-width: 75vw;
   font-size: 1rem;
-  max-width: 36rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -112,14 +119,22 @@ a{
 }
 .record-ol{
   margin: 0 0.8rem;
-  padding-inline-start: 2.2rem; 
+  padding-bottom: 0.8rem;
+  padding-inline-start: 1rem; 
+}
+.tag{
+  display: inline-block;
+  margin-right: 0.8rem;
+  padding: 0 0.4rem;
+  color:#1aaaaa;
+  border: 1px solid #1aaaaa;
 }
 .mark-text{
   padding: 0.2rem 0;
   color:#6a7955;
   font-size: 0.9rem;
   word-wrap: break-word;
-  padding-inline-start: 0.8rem;
+  padding-inline-start: 0.4rem;
   border-bottom: 1px dashed #d5f4db;
 }
 .icon-delete{
@@ -151,17 +166,15 @@ a{
   font-size: 0.8rem;
   color: #93c4ba;
 }
-.label-list label{
-  padding: 0 4px;
-  font-size: 0.8rem;
-  background-color: #7fe0ed;
-  color: #fff;
-  border-radius: 4px;
+.label-list-content{
+  display: inline-block;
+  width: 80%;
+  vertical-align: top;
 }
 .footer{
-  position: fixed;
-  bottom: 0;
-  padding: 0.6rem 0;
+  width: 100%;
+  height: 2.6rem;
+  line-height: 2.6rem;
   text-align: center;
   color: #95a57e;
   font-size: 0.8rem;
@@ -210,4 +223,8 @@ a{
   display: none;
   color: #f87f5d;
   font-size: 0.8rem;
+}
+.nothing{
+  font-size: 0.8rem;
+  color: #95a57e;
 }

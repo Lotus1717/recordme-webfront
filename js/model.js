@@ -14,6 +14,13 @@ const deleteMark = (data) => {
   })
 }
 
+const deleteRecord = (data) => {
+  let url = 'RecordServer/deleteRecord'
+  return axios.post(url, data).then(res => {
+    return res.data
+  })
+}
+
 const queryPageRecords = (data) => {
   let url = 'RecordServer/queryPageRecords'
   return axios.post(url, data).then(res => {
@@ -39,6 +46,7 @@ export {
   queryPageRecords,
   updateRecordList,
   deleteMark,
+  deleteRecord,
   login,
   signup
 }

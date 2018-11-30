@@ -15,19 +15,28 @@ import {
   queryPageRecords,
   updateRecordList,
   deleteMark,
+  deleteRecord,
   login,
   signup
 } from './model.js'
 
 // 记录列表
-// {
-//   url: '', 
-//   title: '',
-//   tag: ['', ''],
-//   recordList: [{markText: '', record: ''}]
-// }
+// [{
+//   "recordId": 0,
+//   "recordName": "",
+//   "recordUrl": "",
+//   "markList": [{
+//     "markId": 0,
+//     "markText": ""
+//   }],
+//   "tags": [{
+//     "tagId": 0,
+//     "tagName": ""
+//   }]
+// }]
 let recordList = []
 // 用户信息
+// {"name":"","password":"","userId":1}
 let user 
 
 // document.getElementById('save_record').addEventListener('click', e => {
@@ -45,7 +54,7 @@ let user
 // })
 
 // 用户登录点击事件
-$('#login').on('click', e => {
+$(document).on('click', '#login', () => {
   let name = $('#name').val()
   let password = $('#pw').val()
   let param = {name, password}
@@ -54,7 +63,7 @@ $('#login').on('click', e => {
       param.userId = res.data.userId
       user = param
       localStorage.setItem('recordme-info', JSON.stringify(param))
-      controlShowUser()
+      init()
     }else{
       $('#error_tip').css('display', 'block')
     }
@@ -64,7 +73,7 @@ $('#login').on('click', e => {
 })
 
 // 用户注册点击事件
-$('#sign').on('click', e => {
+.on('click', '#sign', () => {
   let name = $('#name').val()
   let password = $('#pw').val()
   let param = {name, password}
@@ -73,7 +82,7 @@ $('#sign').on('click', e => {
       param.userId = res.data.userId
       user = param
       localStorage.setItem('recordme-info', JSON.stringify(param))
-      controlShowUser()
+      init()
     }else{
       $('#error_tip').css('display', 'block')
     }
@@ -83,7 +92,7 @@ $('#sign').on('click', e => {
 })
 
 // 导航栏注册按钮点击事件
-$('#nav_signup').on('click', e => {
+.on('click','#nav_signup', () => {
   $('#sign').css('display', 'inline-block')
   $('#login').css('display', 'none')
   $('#nav_entry').css('display', 'inline-block')
@@ -92,7 +101,7 @@ $('#nav_signup').on('click', e => {
 })
 
 // 导航栏登录按钮点击事件
-$('#nav_entry').on('click', e => {
+.on('click','#nav_entry', () => {
   $('#login').css('display', 'inline-block')
   $('#sign').css('display', 'none')
   $('#nav_signup').css('display', 'inline-block')
@@ -101,23 +110,44 @@ $('#nav_entry').on('click', e => {
 })
 
 // 导航栏退出按钮点击事件
-$('#nav_exit').on('click', e => {
+.on('click', '#nav_exit', () => {
   user = null
-  localStorage.setItem('recordme-info', '')
-  controlShowUser()
+  localStorage.removeItem('recordme-info')
+  init()
 })
 
-// $('delete_mark').on('click', e => {
-//   let target = e.target
-//   let parent = target.parentNode
-//   let param = {
-//     data: {
-//       markText: parent.innerText.splice(parent.innerText.length - 1, 1)
-//     },
-//     userId: user.userId
-//   }
-//   deleteMark(param)
-// })
+// 删除标注
+.on('click', '.delete-mark', (e) => {
+  let $mark = $(e.target).parent()
+  let param = {
+    data: {
+      markId: $mark.attr('mark-id'),
+      recordId: $mark.parents('record-detail').attr('record-id')
+    },
+    userId: user.userId
+  }
+  deleteMark(param).then(res => {
+    if (res.result) {
+      $mark.remove()
+    } 
+  })
+})
+
+// 删除记录
+.on('click', '.delete-record', (e) => {
+  let $record = $(e.target).parent().parent()
+  let param = {
+    data: {
+      recordId: $record.attr('record-id')
+    },
+    userId: user.userId
+  }
+  deleteRecord(param).then(res => {
+    if (res.result) {
+      $record.remove()
+    } 
+  })
+})
 
 /** 
  * 渲染记录列表
@@ -127,7 +157,17 @@ let recordListRender = (list) => {
   function fillMarkDom (marks) {
     let dom = ``
     marks.forEach(val => {
-      dom += `<li class="mark-text" mark-id="${val.markId}">${val.markText}<span class="icon-delete" id="delete_mark">×</span></li>`
+      dom += `<li class="mark-text" mark-id="${val.markId}">${val.markText}<span class="icon-delete delete-mark">×</span></li>`
+    })
+    if(marks.length === 0) {
+      dom = '<div class="nothing">没有标注哦( ･´ω`･ )</div>'
+    }
+    return dom
+  }
+  function fillTagDom (tags) {
+    let dom = ``
+    tags.forEach(val => {
+      dom += `<span class="tag" tag-id="${val.tagId}">${val.tagName}</span>`
     })
     return dom
   }
@@ -137,10 +177,13 @@ let recordListRender = (list) => {
               <summary class="record-header">
                 <span class="record-title">${val.recordName}</span>
                 <a class="record-link" href=${val.recordUrl} target="_blank">🔗</a>
-                <span class="icon-delete">×</span>
+                <span class="icon-delete delete-record">×</span>
                 <div class="label-list">
-                    <span class="label-item">标签：</span>
-                    <span class="icon-add-label">＋</span>
+                    <label class="label-item">标签：</label>
+                    <div class="label-list-content">
+                      ${fillTagDom(val.tagList)}
+                      <span class="icon-add-label">＋</span>
+                    </div>                 
                 </div>
               </summary>   
               <ol class="record-ol">
@@ -148,11 +191,14 @@ let recordListRender = (list) => {
               </ol>
             </details>`
   })
+  if(list.length === 0) {
+    dom = '<div class="nothing">没有记录哦( ･´ω`･ )</div>'
+  }
   $('#content').html(dom)
 }
 
-// 控制是否显示登录页面
-let controlShowUser = () => {
+// 初始化 -- 1.控制用户登录页面显示和登录，注册，退出按钮的显示隐藏；2.获取记录
+let init = () => {
   let userInfo = localStorage.getItem('recordme-info')
   if (userInfo) {
     user = JSON.parse(userInfo)
@@ -170,12 +216,12 @@ let controlShowUser = () => {
     $('#nav_exit').css('display', 'inline-block')
     $('#login_wrap').css('display', 'none') 
     $('#user_name').html(user.name + '的摘抄本')
-    initPageRecords()
+    fetchPageRecords()
   }
 }
 
 // 初始化获取记录列表
-let initPageRecords = () => {
+let fetchPageRecords = () => {
   if(user){
     queryPageRecords({userId: user.userId}).then(res => {
       if (res.result) {
@@ -185,5 +231,5 @@ let initPageRecords = () => {
   }
 }
 
-controlShowUser()
-initPageRecords()
+// 初始化
+init()
