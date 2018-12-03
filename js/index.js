@@ -29,7 +29,7 @@ import {
 //     "markId": 0,
 //     "markText": ""
 //   }],
-//   "tags": [{
+//   "tagList": [{
 //     "tagId": 0,
 //     "tagName": ""
 //   }]
@@ -149,6 +149,42 @@ $(document).on('click', '#login', () => {
   })
 })
 
+// 编辑标签
+.on('click', '.edit-tag', (e) => {
+  e.preventDefault()
+  let $wrapper = $(e.target).parent()
+  let $tags = $wrapper.children('.tag')
+  let tags = []
+  $tags.each((i, t) => {
+    tags.push($(t).text())
+  })
+  let dom  = `<input value="${tags.join(' ')}" class="input-text input-edit-tag"/>              
+              <span class="cancel-edit-tag">no</span>
+              <span class="save-tag">ok</span>`
+  $wrapper.html(dom)
+})
+
+// 保存编辑的标签信息
+.on('click', '.save-tag', (e) => {
+  e.preventDefault()
+  
+})
+// 取消编辑标签信息
+.on('click', '.cancel-edit-tag', (e) => {
+  e.preventDefault()
+  let $wrapper = $(e.target).parent()
+  let recordId = $(e.target).parents('.record-detail').attr('record-id')
+  let arr = recordList.filter(val => val.recordId === parseInt(recordId))
+  let tags = arr.length > 0 ? arr[0].tagList : []
+  let dom = ``
+  tags.forEach(val => {
+    dom += `<span class="tag" tag-id="${val.tagId}">${val.tagName}</span>`
+  })
+  dom += '<img src="../img/icon-edit-blur.png" class="icon-edit-label edit-tag"/>'
+  console.log(dom)
+  $wrapper.html(dom)
+})
+
 /** 
  * 渲染记录列表
  * @param [array] data [{"recordId":15,"recordName":"","recordUrl":"","markList":[{"markId":1,"markText":""}]}...]
@@ -179,10 +215,10 @@ let recordListRender = (list) => {
                 <a class="record-link" href=${val.recordUrl} target="_blank">🔗</a>
                 <span class="icon-delete delete-record">×</span>
                 <div class="label-list">
-                    <label class="label-item">标签：</label>
+                    <img src="../img/icon-tag.png" class="icon-tag"/>
                     <div class="label-list-content">
                       ${fillTagDom(val.tagList)}
-                      <span class="icon-add-label">＋</span>
+                      <img src="../img/icon-edit-blur.png" class="icon-edit-label edit-tag"/>
                     </div>                 
                 </div>
               </summary>   
@@ -225,6 +261,7 @@ let fetchPageRecords = () => {
   if(user){
     queryPageRecords({userId: user.userId}).then(res => {
       if (res.result) {
+        recordList = res.data
         recordListRender(res.data)
       }
     })
