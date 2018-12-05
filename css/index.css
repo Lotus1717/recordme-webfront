@@ -146,7 +146,7 @@ a{
 .record-detail{
   margin-bottom: 0.8rem;
   box-shadow: 0 0 0.2rem rgba(61, 160, 65, 0.5);
-  border-radius: 0.4rem;
+  border-radius: 0.3rem;
 }
 .record-title{
   display: inline-block;
@@ -161,6 +161,7 @@ a{
   color: #8c9e74;
   text-decoration: underline;
   vertical-align: super;
+  font-size: 1rem;
 }
 .record-ol{
   margin: 0 0.8rem;
@@ -176,7 +177,7 @@ a{
 .mark-text{
   padding: 0.2rem 0;
   color:#6a7955;
-  font-size: 0.9rem;
+  font-size: 0.9rem !important;
   word-wrap: break-word;
   padding-inline-start: 0.4rem;
   border-bottom: 1px dashed #d5f4db;
@@ -188,18 +189,19 @@ a{
   vertical-align: top;
   cursor: default;
 }
-.icon-delete:hover,
-.icon-edit-label:hover{
+.icon-delete:hover{
   color: #93c4ba;
 }
-.icon-delete:active,
-.icon-edit-label:active{
+.icon-delete:active{
   color: #5ca698;
 }
 .icon-edit-label{
   height: 1rem;
   vertical-align: middle;
   cursor: default;
+}
+.icon-edit-label:hover{
+  background-color: #d5e8e4;
 }
 .icon-tag{
   height: 0.9rem;

@@ -42,11 +42,19 @@ const signup = (data) => {
   })
 }
 
+const updateRecordTags = (data) => {
+  let url = 'RecordServer/updateRecordTags'
+  return axios.post(url, data).then(res => {
+    return res.data
+  })
+}
+
 export {
   queryPageRecords,
   updateRecordList,
   deleteMark,
   deleteRecord,
   login,
-  signup
+  signup,
+  updateRecordTags
 }
