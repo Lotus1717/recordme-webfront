@@ -32,8 +32,9 @@ a{
 }
 .login-wrap{
   display: none;
-  margin: 1.5rem 0;
+  margin-top: 1.5rem;
   text-align: center;
+  height: calc(100% - 7rem);
 }
 .input-text{
   width: 5rem;
