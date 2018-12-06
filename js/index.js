@@ -228,9 +228,11 @@ $(document).on('click', '#login', () => {
 
 const fillTagDom = (tags) => {
   let dom = ``
-  tags.forEach(val => {
-    dom += `<span class="tag" tag-id="${val.tagId}">${val.tagName}</span>`
-  })
+  if(tags){
+    tags.forEach(val => {
+      dom += `<span class="tag" tag-id="${val.tagId}">${val.tagName}</span>`
+    })
+  } 
   return dom
 }
 
@@ -259,7 +261,7 @@ const recordListRender = (list) => {
                 <div class="label-list">
                     <img src="../img/icon-tag.png" class="icon-tag"/>
                     <div class="label-list-content">
-                      ${val.tagList && fillTagDom(val.tagList)}
+                      ${fillTagDom(val.tagList)}
                       <img src="../img/icon-edit-active.png" class="icon-edit-label edit-tag"/>
                     </div>                 
                 </div>
