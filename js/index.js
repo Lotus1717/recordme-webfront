@@ -259,7 +259,7 @@ const recordListRender = (list) => {
                 <div class="label-list">
                     <img src="../img/icon-tag.png" class="icon-tag"/>
                     <div class="label-list-content">
-                      ${fillTagDom(val.tagList)}
+                      ${val.tagList && fillTagDom(val.tagList)}
                       <img src="../img/icon-edit-active.png" class="icon-edit-label edit-tag"/>
                     </div>                 
                 </div>
