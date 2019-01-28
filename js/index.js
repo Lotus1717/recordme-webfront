@@ -228,9 +228,11 @@ $(document).on('click', '#login', () => {
 
 const fillTagDom = (tags) => {
   let dom = ``
-  tags.forEach(val => {
-    dom += `<span class="tag" tag-id="${val.tagId}">${val.tagName}</span>`
-  })
+  if(tags){
+    tags.forEach(val => {
+      dom += `<span class="tag" tag-id="${val.tagId}">${val.tagName}</span>`
+    })
+  } 
   return dom
 }
 
